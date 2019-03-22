@@ -5,3 +5,6 @@ __pycache__/
 
 ### Houdini ###
 backup/
+
+### Blender ###
+*.blend[0-9]*
