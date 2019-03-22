@@ -1,0 +1,55 @@
+#define PI          3.1415926535897931
+
+#pragma help        "Author: Diego Inácio - (c) 2017"
+#pragma info        "Author: Diego Inácio - (c) 2017"
+
+#pragma label       ofreq   "Orientation frequency"
+#pragma label       nfreq   "Noise frequency"
+#pragma label       ooset   "Orientation offset"
+#pragma label       noset   "Noise offset"
+#pragma label       nmult   "Noise multiplier"
+#pragma label       gamma   "Incidence gamma"
+
+#pragma ramp_flt    ramp    rin rps rvl
+#pragma label       ramp    "Incidence profile"
+#pragma parmtag     ramp    rampbasisdefault linear
+#pragma parmtag     ramp    rampshowcontrolsdefault 1
+
+float NaiveNoise(vector freq, offset){
+    // Naive noise function to make irregularity
+    return  sin(2*PI*P.x*freq.x*2 + 12 + offset.x) + cos(2*PI*P.z*freq.x + 21 + offset.x)*
+            sin(2*PI*P.y*freq.y*2 + 23 + offset.y) + cos(2*PI*P.y*freq.y + 32 + offset.y)*
+            sin(2*PI*P.z*freq.z*2 + 34 + offset.z) + cos(2*PI*P.x*freq.z + 43 + offset.z);
+}
+
+vector iridescence( float orient, noiseMult;
+                    vector freqA, offsetA, freqB, offsetB){
+    // This function returns a iridescence value based on orientation
+    vector irid;
+    irid.x = abs(cos(2*PI*orient*freqA.x + NaiveNoise(freqB, offsetB)*noiseMult + 1 + offsetA.x));
+    irid.y = abs(cos(2*PI*orient*freqA.y + NaiveNoise(freqB, offsetB)*noiseMult + 2 + offsetA.y));
+    irid.z = abs(cos(2*PI*orient*freqA.z + NaiveNoise(freqB, offsetB)*noiseMult + 3 + offsetA.z));
+    return irid;
+}
+
+surface
+iridescence_simple
+(   vector  ofreq   =   {1, 1, 1},
+            nfreq   =   {1, 1, 1},
+            ooset   =   {0, 0, 0},
+            noset   =   {0, 0, 0};
+    float   nmult   =   1,
+            gamma   =   0.455;
+    string  rin[]   =   {"linear", "linear"};
+    float   rps[]   =   {0, 1},
+            rvl[]   =   {0, 1})
+{
+    vector _iridColor, E;
+    float fr, _space, _incidence;
+    E = normalize(-I);  
+    fr = dot(N, E);
+    _space = pow(1 - fr, 1/gamma);
+    _incidence = spline(rin, _space, rvl, rps);
+    _iridColor = iridescence(fr, nmult, ofreq, ooset, nfreq, noset);
+    Cf = _iridColor*_incidence;
+}

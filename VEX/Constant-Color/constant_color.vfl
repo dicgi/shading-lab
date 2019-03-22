@@ -1,0 +1,37 @@
+#pragma info        "Author: Diego Inácio - (c) 2017"
+
+#pragma label       pcolor  "Use point color (Cd)"
+#pragma hint        pcolor  toggle
+
+#pragma label       color   "Color"
+#pragma hint        color   color
+#pragma disablewhen color   {pcolor == 1}
+
+#pragma label       palpha  "Use point alpha (Alpha)"
+#pragma hint        palpha  toggle
+
+#pragma label       opacity "Opacity"
+#pragma hint        opacity color
+
+#pragma label       Cd      ""
+#pragma hint        Cd      invisible
+
+#pragma label       Alpha   ""
+#pragma hint        Alpha   invisible
+
+surface
+constant_color
+(   int     pcolor  =   0;
+    vector  color   =   {1, 0, 0.25},
+            opacity =   {1, 1, 1};
+    int     palpha  =   0;
+    vector  Cd      =   {1, 1, 1};
+    float   Alpha   =   1)
+{
+    vector  _color      =   pcolor ? Cd : color;
+    float   _alpha      =   palpha ? Alpha : 1;
+    vector  _opacity    =   opacity*_alpha;
+
+    Cf = _color*_opacity;
+    Of = _opacity;
+}

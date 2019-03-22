@@ -1,0 +1,52 @@
+#pragma help        "Created by Diego Inácio - (c) 2017"
+#pragma info        "Created by Diego Inácio - (c) 2017"
+
+#pragma label       mode    "Mode"
+#pragma choice      mode    "uv"    "UV :: Geometry coordinates"
+#pragma choice      mode    "st"    "ST :: Primitive coordinates"
+
+#pragma label       text    "Texture map"
+#pragma hint        text    image
+
+#pragma label       mult    "Color multiplier"
+#pragma hint        mult    color
+
+#pragma label       opac    "Opacity"
+#pragma hint        opac    color
+
+#pragma label       uv      ""
+#pragma hint        uv      invisible
+
+#pragma label       repeat  "Repeat coordinates"
+#pragma hint        repeat  uv
+
+#pragma label       offset  "Offset"
+#pragma hint        offset  uv
+
+surface
+constant_texture
+(   string  mode    =   "uv",
+            text    =   "Mandril.pic";
+    vector  mult    =   {1, 1, 1},
+            opac    =   {1, 1, 1},
+            uv      =   {0, 0, 0};
+    vector2 repeat  =   {1, 1},
+            offset  =   {0, 0})
+{
+    vector  _coord2d, _texture, _color, _repeat, _offset;
+    if(mode == "st"){
+        _coord2d = set(s, t, 0);
+    }
+    else{
+        _coord2d = uv;
+    }
+    _repeat = repeat;
+    setcomp(_repeat, 1, 2);
+    _offset = offset;
+    setcomp(_offset, 1, 2);
+    _coord2d = _coord2d*_repeat + _offset;
+    _texture = texture(text, _coord2d.x, _coord2d.y);
+    _color = _texture*mult;
+    Cf = _color*opac;
+    Of = opac;
+}
