@@ -1,0 +1,45 @@
+/*
+Author: Diego Inácio - (c) 2018
+GitHub: github.com/diegoinacio
+*/
+
+float diNoise(vector freq, vector offset){
+	// noise function to create irregularity
+	return	sin(2*M_PI*P[0]*freq[0]*2 + 12 + offset[0]) + cos(2*M_PI*P[2]*freq[0] + 21 + offset[0]) *
+			sin(2*M_PI*P[1]*freq[1]*2 + 23 + offset[1]) + cos(2*M_PI*P[1]*freq[1] + 32 + offset[1]) *
+			sin(2*M_PI*P[2]*freq[2]*2 + 34 + offset[2]) + cos(2*M_PI*P[0]*freq[2] + 43 + offset[2]);
+}
+
+color iridescence(	float orient, float noiseMult,
+					vector freqA, vector offsetA,
+					vector freqB, vector offsetB){
+	// this function returns a iridescence value based on orientation
+	color irid;
+	irid[0] = abs(cos(2*M_PI*orient*freqA[0] + diNoise(freqB, offsetB)*noiseMult + 1 + offsetA[0]));
+	irid[1] = abs(cos(2*M_PI*orient*freqA[1] + diNoise(freqB, offsetB)*noiseMult + 2 + offsetA[1]));
+	irid[2] = abs(cos(2*M_PI*orient*freqA[2] + diNoise(freqB, offsetB)*noiseMult + 3 + offsetA[2]));
+	return irid;
+}
+
+shader
+iridescence_simple
+(
+	vector 	ofreq = 1, // Orientation frequency
+	vector 	nfreq = 1, // Noise frequency
+	vector 	ooset = 0, // Orientation offset
+	vector 	noset = 0, // Noise offset
+	float 	nmult = 1, // Noise multiplier
+	float 	gamma = 0.455, // Incidence gamma
+
+	output 	color Cout = 1 //output
+)
+{
+	color _iridColor; vector E;
+	float fr, _space, _incidence;
+	E = normalize(I);
+	fr = dot(N, E);
+	_space = pow(1 - fr, 1/gamma);
+	_incidence = mix(0, 1, _space);
+	_iridColor = iridescence(fr, nmult, ofreq, ooset, nfreq, noset);
+	Cout = _iridColor*_incidence;
+}
