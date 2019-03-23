@@ -8,3 +8,6 @@ backup/
 
 ### Blender ###
 *.blend[0-9]*
+
+### OSL ###
+*.oso
