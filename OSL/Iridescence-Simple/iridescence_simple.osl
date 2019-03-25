@@ -3,8 +3,8 @@ Author: Diego Inácio - (c) 2018
 GitHub: github.com/diegoinacio
 */
 
-float diNoise(vector freq, vector offset){
-	// noise function to create irregularity
+float NaiveNoise(vector freq, vector offset){
+	// Naive noise function to make irregularity
 	return	sin(2*M_PI*P[0]*freq[0]*2 + 12 + offset[0]) + cos(2*M_PI*P[2]*freq[0] + 21 + offset[0]) *
 			sin(2*M_PI*P[1]*freq[1]*2 + 23 + offset[1]) + cos(2*M_PI*P[1]*freq[1] + 32 + offset[1]) *
 			sin(2*M_PI*P[2]*freq[2]*2 + 34 + offset[2]) + cos(2*M_PI*P[0]*freq[2] + 43 + offset[2]);
@@ -13,11 +13,11 @@ float diNoise(vector freq, vector offset){
 color iridescence(	float orient, float noiseMult,
 					vector freqA, vector offsetA,
 					vector freqB, vector offsetB){
-	// this function returns a iridescence value based on orientation
+	// This function returns a iridescence value based on orientation
 	color irid;
-	irid[0] = abs(cos(2*M_PI*orient*freqA[0] + diNoise(freqB, offsetB)*noiseMult + 1 + offsetA[0]));
-	irid[1] = abs(cos(2*M_PI*orient*freqA[1] + diNoise(freqB, offsetB)*noiseMult + 2 + offsetA[1]));
-	irid[2] = abs(cos(2*M_PI*orient*freqA[2] + diNoise(freqB, offsetB)*noiseMult + 3 + offsetA[2]));
+	irid[0] = abs(cos(2*M_PI*orient*freqA[0] + NaiveNoise(freqB, offsetB)*noiseMult + 1 + offsetA[0]));
+	irid[1] = abs(cos(2*M_PI*orient*freqA[1] + NaiveNoise(freqB, offsetB)*noiseMult + 2 + offsetA[1]));
+	irid[2] = abs(cos(2*M_PI*orient*freqA[2] + NaiveNoise(freqB, offsetB)*noiseMult + 3 + offsetA[2]));
 	return irid;
 }
 

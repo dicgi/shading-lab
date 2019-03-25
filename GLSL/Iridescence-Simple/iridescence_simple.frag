@@ -38,8 +38,8 @@ float setRange(float value, float oMin, float oMax, float iMin, float iMax){
 	return iMin + ((value - oMin)/(oMax - oMin))*(iMax - iMin);
 }
 
-float diNoise(vec3 freq, vec3 offset){
-	// noise function to create irregularity
+float NaiveNoise(vec3 freq, vec3 offset){
+	// Naive noise function to make irregularity
 	return	sin(2.0*PI*P.x*freq.x*2.0 + 12.0 + offset.x) + cos(2.0*PI*P.z*freq.x + 21.0 + offset.x)*
 			sin(2.0*PI*P.y*freq.y*2.0 + 23.0 + offset.y) + cos(2.0*PI*P.y*freq.y + 32.0 + offset.y)*
 			sin(2.0*PI*P.z*freq.z*2.0 + 34.0 + offset.z) + cos(2.0*PI*P.x*freq.z + 43.0 + offset.z);
@@ -47,11 +47,11 @@ float diNoise(vec3 freq, vec3 offset){
 
 vec3 iridescence(	float orient, float noiseMult,
 					vec3 freqA, vec3 offsetA, vec3 freqB, vec3 offsetB){
-	// this function returns a iridescence value based on orientation
+	// This function returns a iridescence value based on orientation
 	vec3 irid;
-	irid.x = abs(cos(2.0*PI*orient*freqA.x + diNoise(freqB, offsetB)*noiseMult + 1.0 + offsetA.x));
-	irid.y = abs(cos(2.0*PI*orient*freqA.y + diNoise(freqB, offsetB)*noiseMult + 2.0 + offsetA.y));
-	irid.z = abs(cos(2.0*PI*orient*freqA.z + diNoise(freqB, offsetB)*noiseMult + 3.0 + offsetA.z));
+	irid.x = abs(cos(2.0*PI*orient*freqA.x + NaiveNoise(freqB, offsetB)*noiseMult + 1.0 + offsetA.x));
+	irid.y = abs(cos(2.0*PI*orient*freqA.y + NaiveNoise(freqB, offsetB)*noiseMult + 2.0 + offsetA.y));
+	irid.z = abs(cos(2.0*PI*orient*freqA.z + NaiveNoise(freqB, offsetB)*noiseMult + 3.0 + offsetA.z));
 	return irid;
 }
 
