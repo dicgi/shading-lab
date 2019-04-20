@@ -1,0 +1,63 @@
+#define PI          3.1415926535897931
+
+#pragma help        "Created by Diego Inácio - (c) 2019"
+#pragma info        "Created by Diego Inácio - (c) 2019"
+
+#pragma label       Theta       "Maximum Theta"
+#pragma label       spread      "Overall Spread"
+#pragma label       DATA        "Data Points"
+#pragma label       kd          "Diffuse"
+#pragma label       ks          "Specular"
+#pragma label       bump        "Bump"
+
+surface
+qrotation_field
+(   float   Theta   = 0.5,
+            spread  = 1,
+            kd      = 1,
+            ks      = 0.5,
+            bump    = 0.1;
+    string  DATA    = "$HIP/../VEX/Reading-Data-Points/_datapoints.bgeo.sc")
+{
+    float d, Np, theta, pFratt, factor, pspread;
+    vector _P, pP, axis, pVratt;
+    vector4 Q;
+    string group;
+    
+    _P = ptransform("space:camera", "space:world", P);
+
+    theta = anoise(_P + 123, 8, 0.75, 1)*0.5;
+    axis = anoise(_P + 234, 8, 0.75, 1);
+    Q = quaternion(theta, axis);
+    _P = qrotate(Q, _P);
+    
+    for(int g = 0; g < 8; g++){
+        group = concat("group", itoa(g));
+        int p[] = expandpointgroup(DATA, group);
+        Np = len(p);
+        factor = g + 1;
+        for (int i = 0; i < Np; i++){
+            pP = point(DATA, "P", p[i]);
+            axis = point(DATA, "N", p[i]);
+            pFratt = point(DATA, "fratt", p[i]);
+            pVratt = point(DATA, "vratt", p[i]);
+            pspread = pFratt*spread/factor;
+            d = distance2(pP, _P);
+            d = exp(-d*d/pspread);
+            theta = 2*PI*(pFratt*2 - 1)*d*Theta/factor;
+            Q = quaternion(theta, axis);
+            _P = qrotate(Q, _P - pP) + pP;
+        }
+    }
+
+    vector outColor = anoise(_P*0.5, 8, 0.75, 1);
+
+    vector Nn = normalize(computenormal(P + min(outColor)*bump, N, Ng));
+    
+    vector diff = diffuse(Nn)*outColor*dot(normalize(-I), N);
+
+    vector spec = specular(Nn, normalize(-I), fit01(min(outColor), 0.1, 0.5))*0.5;
+    spec += specular(N, normalize(-I), 0.05);
+
+    Cf = diff*kd + spec*ks;
+}

@@ -1,0 +1,25 @@
+#pragma help        "Created by Diego Inácio - (c) 2019"
+#pragma info        "Created by Diego Inácio - (c) 2019"
+
+#pragma label       kd          "Diffuse"
+#pragma label       ks          "Specular"
+#pragma label       DATA        "Data Points"
+#pragma label       group       "Point Group"
+
+surface
+cristalize_normals
+(   float   kd      = 0.5,
+            ks      = 1;
+    string  DATA    = "$HIP/../VEX/Reading-Data-Points/_datapoints.bgeo.sc",
+            group   = "group0";)
+{
+    vector _P = ptransform("space:camera", "space:world", P);
+
+    int i = nearpoint(DATA, group, _P);
+    vector pN = point(DATA, "N", i)*{1, 1, -1};
+
+    vector diff = diffuse(pN);
+    vector spec = specular(pN, normalize(-I), 0.25);
+
+    Cf = diff*kd + spec*ks;
+}
