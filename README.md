@@ -1,3 +1,3 @@
-# shading
+# Shading Lab
 
-Pixel color given by code :heart:
+Lab of _pixel colorization_ given by code :heart:
