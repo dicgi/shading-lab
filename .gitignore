@@ -3,6 +3,9 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+### Jupyter Notebook ###
+.ipynb_checkpoints
+
 ### Houdini ###
 backup/
 
@@ -11,3 +14,14 @@ backup/
 
 ### OSL ###
 *.oso
+
+###################
+### Page Assets ###
+###################
+
+### NodeJS ###
+node_modules/
+package-lock.json
+
+# live sass compiler
+*.css.map
