@@ -1,0 +1,53 @@
+{
+    "better-comments.tags": [
+        {
+            "tag": "!",
+            "color": "#FF0044",
+            "strikethrough": false,
+            "backgroundColor": "transparent"
+        },
+        {
+            "tag": "/!",
+            "color": "#CC0044",
+            "strikethrough": false,
+            "backgroundColor": "transparent"
+        },
+        {
+            "tag": "*",
+            "color": "#88FF00",
+            "strikethrough": false,
+            "backgroundColor": "transparent"
+        },
+        {
+            "tag": "/*",
+            "color": "#44AA00",
+            "strikethrough": false,
+            "backgroundColor": "transparent"
+        },
+        {
+            "tag": "?",
+            "color": "#AA44FF",
+            "strikethrough": false,
+            "backgroundColor": "transparent"
+        },
+        {
+            "tag": "//",
+            "color": "#474747",
+            "strikethrough": true,
+            "backgroundColor": "transparent"
+        },
+        {
+            "tag": "todo",
+            "color": "#FF8C00",
+            "strikethrough": false,
+            "backgroundColor": "transparent"
+        }
+    ],
+    "liveSassCompile.settings.formats": [{
+        "format": "expanded",
+        "extensionName": ".css",
+        "savePath": "./assets/css"
+    }
+],
+"liveServer.settings.port": 5501
+}
