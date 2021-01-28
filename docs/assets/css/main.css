@@ -181,12 +181,27 @@ html {
 }
 
 body {
+  background-image: -webkit-gradient(linear, left bottom, left top, from(rgba(68, 68, 68, 0.5)), to(rgba(68, 68, 68, 0.5))), url("../../images/index.png");
+  background-image: linear-gradient(to top, rgba(68, 68, 68, 0.5), rgba(68, 68, 68, 0.5)), url("../../images/index.png");
   background-color: #444444;
-  background-image: -webkit-gradient(linear, left bottom, left top, from(rgba(68, 68, 68, 0.5)), to(rgba(68, 68, 68, 0.5))), url("../../images/bg.png");
-  background-image: linear-gradient(to top, rgba(68, 68, 68, 0.5), rgba(68, 68, 68, 0.5)), url("../../images/bg.png");
   background-size: auto, cover;
   background-attachment: fixed, fixed;
   background-position: center, center;
+}
+
+body[background="glsl"] {
+  background-image: -webkit-gradient(linear, left bottom, left top, from(rgba(68, 68, 68, 0.5)), to(rgba(68, 68, 68, 0.5))), url("../../images/glsl.png");
+  background-image: linear-gradient(to top, rgba(68, 68, 68, 0.5), rgba(68, 68, 68, 0.5)), url("../../images/glsl.png");
+}
+
+body[background="osl"] {
+  background-image: -webkit-gradient(linear, left bottom, left top, from(rgba(68, 68, 68, 0.5)), to(rgba(68, 68, 68, 0.5))), url("../../images/osl.png");
+  background-image: linear-gradient(to top, rgba(68, 68, 68, 0.5), rgba(68, 68, 68, 0.5)), url("../../images/osl.png");
+}
+
+body[background="vex"] {
+  background-image: -webkit-gradient(linear, left bottom, left top, from(rgba(68, 68, 68, 0.5)), to(rgba(68, 68, 68, 0.5))), url("../../images/vex.png");
+  background-image: linear-gradient(to top, rgba(68, 68, 68, 0.5), rgba(68, 68, 68, 0.5)), url("../../images/vex.png");
 }
 
 body.is-preload *,
@@ -3283,12 +3298,24 @@ body.is-menu-visible #menu .inner {
 @media screen and (max-width: 1280px) {
   #banner {
     padding: 7em 0 8.25em 0 ;
+    background-image: -webkit-gradient(linear, left bottom, left top, from(rgba(68, 68, 68, 0.5)), to(rgba(68, 68, 68, 0.5))), url("../../images/index.png");
+    background-image: linear-gradient(to top, rgba(68, 68, 68, 0.5), rgba(68, 68, 68, 0.5)), url("../../images/index.png");
     background-color: #444444;
-    background-image: -webkit-gradient(linear, left bottom, left top, from(rgba(68, 68, 68, 0.5)), to(rgba(68, 68, 68, 0.5))), url("../../images/bg.png");
-    background-image: linear-gradient(to top, rgba(68, 68, 68, 0.5), rgba(68, 68, 68, 0.5)), url("../../images/bg.png");
     background-size: auto, cover;
     background-position: center, center;
     margin-bottom: -6.5em;
+  }
+  #banner[background="glsl"] {
+    background-image: -webkit-gradient(linear, left bottom, left top, from(rgba(68, 68, 68, 0.5)), to(rgba(68, 68, 68, 0.5))), url("../../images/glsl.png");
+    background-image: linear-gradient(to top, rgba(68, 68, 68, 0.5), rgba(68, 68, 68, 0.5)), url("../../images/glsl.png");
+  }
+  #banner[background="osl"] {
+    background-image: -webkit-gradient(linear, left bottom, left top, from(rgba(68, 68, 68, 0.5)), to(rgba(68, 68, 68, 0.5))), url("../../images/osl.png");
+    background-image: linear-gradient(to top, rgba(68, 68, 68, 0.5), rgba(68, 68, 68, 0.5)), url("../../images/osl.png");
+  }
+  #banner[background="vex"] {
+    background-image: -webkit-gradient(linear, left bottom, left top, from(rgba(68, 68, 68, 0.5)), to(rgba(68, 68, 68, 0.5))), url("../../images/vex.png");
+    background-image: linear-gradient(to top, rgba(68, 68, 68, 0.5), rgba(68, 68, 68, 0.5)), url("../../images/vex.png");
   }
 }
 
@@ -3376,12 +3403,24 @@ body.is-preload #banner p {
 @media screen and (max-width: 1280px) {
   #wrapper > header {
     padding: 9em 0 6.25em 0 ;
+    background-image: -webkit-gradient(linear, left bottom, left top, from(rgba(68, 68, 68, 0.5)), to(rgba(68, 68, 68, 0.5))), url("../../images/index.png");
+    background-image: linear-gradient(to top, rgba(68, 68, 68, 0.5), rgba(68, 68, 68, 0.5)), url("../../images/index.png");
     background-color: #444444;
-    background-image: -webkit-gradient(linear, left bottom, left top, from(rgba(68, 68, 68, 0.5)), to(rgba(68, 68, 68, 0.5))), url("../../images/bg.png");
-    background-image: linear-gradient(to top, rgba(68, 68, 68, 0.5), rgba(68, 68, 68, 0.5)), url("../../images/bg.png");
     background-size: auto, cover;
     background-position: center, 0% 30%;
     margin-bottom: -6.5em;
+  }
+  #wrapper > header[background="glsl"] {
+    background-image: -webkit-gradient(linear, left bottom, left top, from(rgba(68, 68, 68, 0.5)), to(rgba(68, 68, 68, 0.5))), url("../../images/glsl.png");
+    background-image: linear-gradient(to top, rgba(68, 68, 68, 0.5), rgba(68, 68, 68, 0.5)), url("../../images/glsl.png");
+  }
+  #wrapper > header[background="osl"] {
+    background-image: -webkit-gradient(linear, left bottom, left top, from(rgba(68, 68, 68, 0.5)), to(rgba(68, 68, 68, 0.5))), url("../../images/osl.png");
+    background-image: linear-gradient(to top, rgba(68, 68, 68, 0.5), rgba(68, 68, 68, 0.5)), url("../../images/osl.png");
+  }
+  #wrapper > header[background="vex"] {
+    background-image: -webkit-gradient(linear, left bottom, left top, from(rgba(68, 68, 68, 0.5)), to(rgba(68, 68, 68, 0.5))), url("../../images/vex.png");
+    background-image: linear-gradient(to top, rgba(68, 68, 68, 0.5), rgba(68, 68, 68, 0.5)), url("../../images/vex.png");
   }
 }
 
@@ -3856,13 +3895,25 @@ body.is-preload #banner p {
 
 @media screen and (max-width: 1280px) {
   #footer {
+    background-image: -webkit-gradient(linear, left bottom, left top, from(rgba(68, 68, 68, 0.5)), to(rgba(68, 68, 68, 0.5))), url("../../images/index.png");
+    background-image: linear-gradient(to top, rgba(68, 68, 68, 0.5), rgba(68, 68, 68, 0.5)), url("../../images/index.png");
     background-color: #444444;
-    background-image: -webkit-gradient(linear, left bottom, left top, from(rgba(68, 68, 68, 0.5)), to(rgba(68, 68, 68, 0.5))), url("../../images/bg.png");
-    background-image: linear-gradient(to top, rgba(68, 68, 68, 0.5), rgba(68, 68, 68, 0.5)), url("../../images/bg.png");
     background-size: auto, cover;
     background-position: center, center;
     margin-top: -6.5em;
     padding-top: 6.5em;
+  }
+  #footer[background="glsl"] {
+    background-image: -webkit-gradient(linear, left bottom, left top, from(rgba(68, 68, 68, 0.5)), to(rgba(68, 68, 68, 0.5))), url("../../images/glsl.png");
+    background-image: linear-gradient(to top, rgba(68, 68, 68, 0.5), rgba(68, 68, 68, 0.5)), url("../../images/glsl.png");
+  }
+  #footer[background="osl"] {
+    background-image: -webkit-gradient(linear, left bottom, left top, from(rgba(68, 68, 68, 0.5)), to(rgba(68, 68, 68, 0.5))), url("../../images/osl.png");
+    background-image: linear-gradient(to top, rgba(68, 68, 68, 0.5), rgba(68, 68, 68, 0.5)), url("../../images/osl.png");
+  }
+  #footer[background="vex"] {
+    background-image: -webkit-gradient(linear, left bottom, left top, from(rgba(68, 68, 68, 0.5)), to(rgba(68, 68, 68, 0.5))), url("../../images/vex.png");
+    background-image: linear-gradient(to top, rgba(68, 68, 68, 0.5), rgba(68, 68, 68, 0.5)), url("../../images/vex.png");
   }
 }
 

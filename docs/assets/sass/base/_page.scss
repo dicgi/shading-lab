@@ -31,14 +31,8 @@ html {
 }
 
 body {
+  @include dynamic-background-image;
   background-color: _palette(bg);
-
-  background-image: linear-gradient(
-      to top,
-      transparentize(_palette(bg), $bg-transparent),
-      transparentize(_palette(bg), $bg-transparent)
-    ),
-    url("../../images/bg.png");
 
   background-size: auto, cover;
 

@@ -68,3 +68,29 @@
 
   @return url("data:image/svg+xml;charset=utf8,#{$svg}");
 }
+
+// ! Dynamic background image
+@mixin dynamic-linear-gradient($name) {
+  background-image: linear-gradient(
+      to top,
+      transparentize(_palette(bg), $bg-transparent),
+      transparentize(_palette(bg), $bg-transparent)
+    ),
+    url("../../images/" + $name + ".png");
+}
+
+@mixin dynamic-background-image {
+  @include dynamic-linear-gradient("index");
+
+  &[background="glsl"] {
+    @include dynamic-linear-gradient("glsl");
+  }
+
+  &[background="osl"] {
+    @include dynamic-linear-gradient("osl");
+  }
+
+  &[background="vex"] {
+    @include dynamic-linear-gradient("vex");
+  }
+}
