@@ -7,12 +7,12 @@
 #pragma label       group       "Point Group"
 
 surface
-cristalize_normals
-(   float   kd      = 0.5,
-            ks      = 1;
-    string  DATA    = "$HIP/../VEX/Reading-Data-Points/_datapoints.bgeo.sc",
-            group   = "group0";)
-{
+cristalize_normals (
+    float   kd    = 0.5,
+            ks    = 1;
+    string  DATA  = "$HIP/../VEX/Reading-Data-Points/_datapoints.bgeo.sc",
+            group = "group0";
+) {
     vector _P = ptransform("space:camera", "space:world", P);
 
     int i = nearpoint(DATA, group, _P);

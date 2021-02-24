@@ -20,14 +20,14 @@
 #pragma hint        Alpha   invisible
 
 surface
-constant_color
-(   int     pcolor  =   0;
+constant_color (
+    int     pcolor  =   0;
     vector  color   =   {1, 0, 0.25},
             opacity =   {1, 1, 1};
     int     palpha  =   0;
     vector  Cd      =   {1, 1, 1};
-    float   Alpha   =   1)
-{
+    float   Alpha   =   1
+) {
     vector  _color      =   pcolor ? Cd : color;
     float   _alpha      =   palpha ? Alpha : 1;
     vector  _opacity    =   opacity*_alpha;

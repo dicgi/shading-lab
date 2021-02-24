@@ -24,11 +24,11 @@ http://www.opengl.org/
 varying vec4 P;
 varying float fr;
 
-void main(void){
-	P = gl_Vertex;
-	vec3 N = gl_NormalMatrix*gl_Normal;
-	vec3 V = vec3(gl_ModelViewMatrix*gl_Vertex);
-	vec3 E = normalize(-V);
-	fr = dot(N, E);
-	gl_Position = gl_ModelViewProjectionMatrix*gl_Vertex;
+void main(void) {
+    P = gl_Vertex;
+    vec3 N = gl_NormalMatrix*gl_Normal;
+    vec3 V = vec3(gl_ModelViewMatrix*gl_Vertex);
+    vec3 E = normalize(-V);
+    fr = dot(N, E);
+    gl_Position = gl_ModelViewProjectionMatrix*gl_Vertex;
 }

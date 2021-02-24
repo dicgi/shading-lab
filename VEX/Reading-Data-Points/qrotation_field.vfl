@@ -11,32 +11,32 @@
 #pragma label       bump        "Bump"
 
 surface
-qrotation_field
-(   float   Theta   = 0.5,
+qrotation_field (
+    float   Theta   = 0.5,
             spread  = 1,
             kd      = 1,
             ks      = 0.5,
             bump    = 0.1;
-    string  DATA    = "$HIP/../VEX/Reading-Data-Points/_datapoints.bgeo.sc")
-{
+    string  DATA    = "$HIP/../VEX/Reading-Data-Points/_datapoints.bgeo.sc"
+) {
     float d, Np, theta, pFratt, factor, pspread;
     vector _P, pP, axis, pVratt;
     vector4 Q;
     string group;
-    
+
     _P = ptransform("space:camera", "space:world", P);
 
     theta = anoise(_P + 123, 8, 0.75, 1)*0.5;
     axis = anoise(_P + 234, 8, 0.75, 1);
     Q = quaternion(theta, axis);
     _P = qrotate(Q, _P);
-    
-    for(int g = 0; g < 8; g++){
+
+    for(int g = 0; g < 8; g++) {
         group = concat("group", itoa(g));
         int p[] = expandpointgroup(DATA, group);
         Np = len(p);
         factor = g + 1;
-        for (int i = 0; i < Np; i++){
+        for (int i = 0; i < Np; i++) {
             pP = point(DATA, "P", p[i]);
             axis = point(DATA, "N", p[i]);
             pFratt = point(DATA, "fratt", p[i]);

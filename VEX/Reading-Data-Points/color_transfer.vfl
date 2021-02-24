@@ -7,22 +7,22 @@
 #pragma label       group       "Point Group"
 
 surface
-color_transfer
-(   float   mult    = 0.5,
+color_transfer (
+    float   mult    = 0.5,
             spread  = 1;
     string  DATA    = "$HIP/../VEX/Reading-Data-Points/_datapoints.bgeo.sc",
-            group   = "group0";)
-{
+            group   = "group0";
+) {
     float d, Np, pFratt;
     vector _P, pP, pCd, pVratt, outColor;
-    
+
     _P = ptransform("space:camera", "space:world", P);
-    
+
     outColor = 0;
-    
+
     int p[] = expandpointgroup(DATA, group);
     Np = len(p);
-    for(int i = 0; i < Np; i++){
+    for(int i = 0; i < Np; i++) {
         pP = point(DATA, "P", p[i]);
         pCd = point(DATA, "Cd", p[i]);
         pFratt = point(DATA, "fratt", p[i]);

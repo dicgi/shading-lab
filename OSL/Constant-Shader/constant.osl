@@ -1,10 +1,10 @@
 /*
 Created by Diego Inácio - (c) 2018
 */
-shader constant(
-color Cin = color(1, 0, 0.25), // input
-output 	color Cout = color(1, 1, 1) //output
-)
-{
-	Cout = Cin;
+
+shader constant (
+    color Cin = color(1, 0, 0.25), // input
+    output 	color Cout = color(1, 1, 1) //output
+) {
+    Cout = Cin;
 }

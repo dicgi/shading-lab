@@ -24,20 +24,19 @@
 #pragma hint        offset  uv
 
 surface
-constant_texture
-(   string  mode    =   "uv",
+constant_texture (
+    string  mode    =   "uv",
             text    =   "Mandril.pic";
     vector  mult    =   {1, 1, 1},
             opac    =   {1, 1, 1},
             uv      =   {0, 0, 0};
     vector2 repeat  =   {1, 1},
-            offset  =   {0, 0})
-{
+            offset  =   {0, 0}
+) {
     vector  _coord2d, _texture, _color, _repeat, _offset;
-    if(mode == "st"){
+    if(mode == "st") {
         _coord2d = set(s, t, 0);
-    }
-    else{
+    } else {
         _coord2d = uv;
     }
     _repeat = repeat;

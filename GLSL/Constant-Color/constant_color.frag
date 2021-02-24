@@ -1,6 +1,6 @@
-const vec4	color	= vec4(1.0, 0.0, 0.25, 1.0),
-			opacity	= vec4(1.0, 1.0, 1.0, 1.0);
+const vec4 color   = vec4(1.00, 0.00, 0.25, 1.00),
+           opacity = vec4(1.00, 1.00, 1.00, 1.00);
 
-void main(void){
-	gl_FragColor = color*opacity;
+void main(void) {
+    gl_FragColor = color*opacity;
 }
