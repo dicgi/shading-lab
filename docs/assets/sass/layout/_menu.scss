@@ -43,7 +43,7 @@
     max-width: 100%;
     opacity: 0;
     position: relative;
-    width: 18em;
+    width: 20em;
   }
 
   h2 {
@@ -91,6 +91,10 @@
 
         &:hover {
           background: saturate(darken(_palette(accent), 3), 1.5);
+        }
+
+        .software {
+          font-weight: 600;
         }
       }
     }
