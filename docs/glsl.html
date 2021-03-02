@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="title" content="glsl" />
+    <title>GLSL</title>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, user-scalable=no"
+    />
+    <link rel="stylesheet" href="assets/css/main.css" />
+    <noscript
+      ><link rel="stylesheet" href="assets/css/noscript.css"
+    /></noscript>
+  </head>
+
+  <body class="is-preload">
+    <!-- Page Wrapper -->
+    <div id="page-wrapper">
+      <!-- Header -->
+      <header id="header" class="alt"></header>
+
+      <!-- Menu -->
+      <nav id="menu"></nav>
+
+      <!-- Banner -->
+      <section id="banner">
+        <div class="inner">
+          <h2>GLSL</h2>
+          <p>
+            Experiments and Shaders written in
+            <a
+              href="https://www.khronos.org/opengl/wiki/OpenGL_Shading_Language"
+              target="_blank"
+              >OpenGL Shading Language</a
+            >.
+          </p>
+        </div>
+      </section>
+
+      <!-- Wrapper -->
+      <section class="wrapper">
+        <div class="wrapper">
+          <div class="inner">
+            <p>
+              A collection of shader and experiments using
+              <a
+                href="https://www.khronos.org/opengl/wiki/OpenGL_Shading_Language"
+                target="_blank"
+                >OpenGL Shading Language</a
+              >. Here you are going to find:
+            </p>
+            <!-- ? Content table -->
+            <div class="content-table">
+              <ul>
+                <li><a href="#constant">1. Constant Shaders</a></li>
+                <li><a href="#iridescence">2. Iridescence Shader</a></li>
+              </ul>
+            </div>
+            <p>
+              If you want to know more, please consider vising the
+              <a
+                href="https://github.com/diegoinacio/shading-lab/tree/master/GLSL"
+                target="_blank"
+                class="button small icon brands fa-github"
+                >repository</a
+              >.
+            </p>
+            <!-- ? Content -->
+            <div class="content">
+              <!-- * Shader -->
+              <h2 id="constant">1. Constant Shaders</h2>
+              <img
+                src="images/constant_shader.jpg"
+                alt=""
+                style="width: 100%"
+              />
+              <p>
+                Constant shaded color and not affected by lighting. It is
+                probably the most basic shader to produce.
+              </p>
+              <section class="features">
+                <article>
+                  <a
+                    href="https://github.com/diegoinacio/shading-lab/tree/master/GLSL/Constant-Color"
+                    class="image"
+                    target="_blank"
+                    ><img src="images/constant_color_glsl.jpg" alt=""
+                  /></a>
+                  <h3 class="major">Constant Color</h3>
+                  <p>A simple pure shaded color.</p>
+                  <a
+                    href="https://github.com/diegoinacio/shading-lab/tree/master/GLSL/Constant-Color"
+                    class="special"
+                    target="_blank"
+                    >Learn more</a
+                  >
+                </article>
+                <article>
+                  <a
+                    href="https://github.com/diegoinacio/shading-lab/tree/master/GLSL/Constant-Texture"
+                    class="image"
+                    target="_blank"
+                    ><img src="images/constant_texture_glsl.jpg" alt=""
+                  /></a>
+                  <h3 class="major">Constant Texture</h3>
+                  <p>A simple pure shaded color from texture.</p>
+                  <a
+                    href="https://github.com/diegoinacio/shading-lab/tree/master/GLSL/Constant-Texture"
+                    class="special"
+                    target="_blank"
+                    >Learn more</a
+                  >
+                </article>
+              </section>
+              <!-- /* Shader -->
+              <!-- * Shader -->
+              <h2 id="iridescence">2. Iridescence Shader</h2>
+              <img
+                src="images/iridescence_shader.jpg"
+                alt=""
+                style="width: 100%"
+              />
+              <p>
+                A simple <em>iridescence</em> effect inspired by the
+                <em>Goniochromism</em> phenomenon, which varies its aspect based
+                on the relationship between the surface normal and the camera
+                angle. The visual beautification is due the
+                <em>pseudo noise</em> function, that makes the aspect a little
+                more appealing.
+              </p>
+              <pre>
+                <code class="language-clike">
+                  float NaiveNoise(vec3 freq, vec3 offset) {
+                    // Naive noise function to make irregularity
+                    return sin(2.0*PI*P.x*freq.x*2.0 + 12.0 + offset.x) +
+                      cos(2.0*PI*P.z*freq.x + 21.0 + offset.x) *
+                      sin(2.0*PI*P.y*freq.y*2.0 + 23.0 + offset.y) +
+                      cos(2.0*PI*P.y*freq.y + 32.0 + offset.y) *
+                      sin(2.0*PI*P.z*freq.z*2.0 + 34.0 + offset.z) +
+                      cos(2.0*PI*P.x*freq.z + 43.0 + offset.z);
+                  }
+
+                  vec3 iridescence(
+                    float orient,
+                    float noiseMult,
+                    vec3 freqA,
+                    vec3 offsetA,
+                    vec3 freqB,
+                    vec3 offsetB
+                  ) {
+                    // This function returns a iridescence value based on orientation
+                    vec3 irid;
+                    irid.x = abs(cos(
+                      2.0*PI*orient*freqA.x + NaiveNoise(freqB, offsetB)*noiseMult + 1.0 + offsetA.x
+                    ));
+                    irid.y = abs(cos(
+                      2.0*PI*orient*freqA.y + NaiveNoise(freqB, offsetB)*noiseMult + 2.0 + offsetA.y
+                    ));
+                    irid.z = abs(cos(
+                      2.0*PI*orient*freqA.z + NaiveNoise(freqB, offsetB)*noiseMult + 3.0 + offsetA.z
+                    ));
+
+                    return irid;
+                  }
+                </code>
+              </pre>
+              <section class="features">
+                <article>
+                  <a
+                    href="https://github.com/diegoinacio/shading-lab/tree/master/GLSL/Iridescence-Simple"
+                    class="image"
+                    target="_blank"
+                    ><img src="images/iridescence_simple_glsl.jpg" alt=""
+                  /></a>
+                  <h3 class="major">Iridescence Simple</h3>
+                  <p>A simple iridescent shader.</p>
+                  <a
+                    href="https://github.com/diegoinacio/shading-lab/tree/master/GLSL/Iridescence-Simple"
+                    class="special"
+                    target="_blank"
+                    >Learn more</a
+                  >
+                </article>
+              </section>
+              <!-- /* Shader -->
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Footer -->
+      <section id="footer"></section>
+    </div>
+
+    <!-- Scripts -->
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/jquery.scrollex.min.js"></script>
+    <script src="assets/js/browser.min.js"></script>
+    <script src="assets/js/breakpoints.min.js"></script>
+    <script src="assets/js/util.js"></script>
+    <script src="assets/js/main.js"></script>
+
+    <script src="assets/js/prism.js"></script>
+
+    <script src="assets/template/setup.js"></script>
+    <script src="assets/template/header.js"></script>
+    <script src="assets/template/menu.js"></script>
+    <script src="assets/template/footer.js"></script>
+  </body>
+</html>

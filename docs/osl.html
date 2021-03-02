@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="title" content="osl" />
+    <title>OSL</title>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, user-scalable=no"
+    />
+    <link rel="stylesheet" href="assets/css/main.css" />
+    <noscript
+      ><link rel="stylesheet" href="assets/css/noscript.css"
+    /></noscript>
+  </head>
+
+  <body class="is-preload">
+    <!-- Page Wrapper -->
+    <div id="page-wrapper">
+      <!-- Header -->
+      <header id="header" class="alt"></header>
+
+      <!-- Menu -->
+      <nav id="menu"></nav>
+
+      <!-- Banner -->
+      <section id="banner">
+        <div class="inner">
+          <h2>OSL</h2>
+          <p>
+            Experiments and Shaders written in
+            <a
+              href="https://github.com/imageworks/OpenShadingLanguage"
+              target="_blank"
+              >Open Shading Language</a
+            >.
+          </p>
+        </div>
+      </section>
+
+      <!-- Wrapper -->
+      <section class="wrapper">
+        <div class="wrapper">
+          <div class="inner">
+            <p>
+              A collection of shader and experiments using
+              <a
+                href="https://github.com/imageworks/OpenShadingLanguage"
+                target="_blank"
+                >Open Shading Language</a
+              >. Here you are going to find:
+            </p>
+            <!-- ? Content table -->
+            <div class="content-table">
+              <ul>
+                <li><a href="#constant">1. Constant Shader</a></li>
+                <li><a href="#iridescence">2. Iridescence Shader</a></li>
+              </ul>
+            </div>
+            <p>
+              If you want to know more, please consider vising the
+              <a
+                href="https://github.com/diegoinacio/shading-lab/tree/master/OSL"
+                target="_blank"
+                class="button small icon brands fa-github"
+                >repository</a
+              >.
+            </p>
+            <!-- ? Content -->
+            <div class="content">
+              <!-- * Shader -->
+              <h2 id="constant">1. Constant Shader</h2>
+              <img
+                src="images/constant_shader.jpg"
+                alt=""
+                style="width: 100%"
+              />
+              <p>
+                Constant shaded color and not affected by lighting. It is
+                probably the most basic shader to produce.
+              </p>
+              <section class="features">
+                <article>
+                  <a
+                    href="https://github.com/diegoinacio/shading-lab/tree/master/OSL/Constant-Shader"
+                    class="image"
+                    target="_blank"
+                    ><img src="images/constant_color_osl.jpg" alt=""
+                  /></a>
+                  <h3 class="major">Constant Color or Texture</h3>
+                  <p>A simple pure shaded color.</p>
+                  <a
+                    href="https://github.com/diegoinacio/shading-lab/tree/master/OSL/Constant-Shader"
+                    class="special"
+                    target="_blank"
+                    >Learn more</a
+                  >
+                </article>
+              </section>
+              <!-- /* Shader -->
+              <!-- * Shader -->
+              <h2 id="iridescence">2. Iridescence Shader</h2>
+              <img
+                src="images/iridescence_shader.jpg"
+                alt=""
+                style="width: 100%"
+              />
+              <p>
+                A simple <em>iridescence</em> effect inspired by the
+                <em>Goniochromism</em> phenomenon, which varies its aspect based
+                on the relationship between the surface normal and the camera
+                angle. The visual beautification is due the
+                <em>pseudo noise</em> function, that makes the aspect a little
+                more appealing.
+              </p>
+              <pre>
+                <code class="language-clike">
+                  float NaiveNoise(vector freq, vector offset) {
+                    // Naive noise function to make irregularity
+                    return sin(2*M_PI*P[0]*freq[0]*2 + 12 + offset[0]) +
+                      cos(2*M_PI*P[2]*freq[0] + 21 + offset[0]) *
+                      sin(2*M_PI*P[1]*freq[1]*2 + 23 + offset[1]) +
+                      cos(2*M_PI*P[1]*freq[1] + 32 + offset[1]) *
+                      sin(2*M_PI*P[2]*freq[2]*2 + 34 + offset[2]) +
+                      cos(2*M_PI*P[0]*freq[2] + 43 + offset[2]);
+                  }
+                  
+                  color iridescence(
+                    float orient,
+                    float noiseMult,
+                    vector freqA,
+                    vector offsetA,
+                    vector freqB,
+                    vector offsetB
+                  ) {
+                    // This function returns a iridescence value based on orientation
+                    color irid;
+                    irid[0] = abs(cos(
+                      2*M_PI*orient*freqA[0] + NaiveNoise(freqB, offsetB)*noiseMult + 1 + offsetA[0]
+                    ));
+                    irid[1] = abs(cos(
+                      2*M_PI*orient*freqA[1] + NaiveNoise(freqB, offsetB)*noiseMult + 2 + offsetA[1]
+                    ));
+                    irid[2] = abs(cos(
+                      2*M_PI*orient*freqA[2] + NaiveNoise(freqB, offsetB)*noiseMult + 3 + offsetA[2]
+                    ));
+
+                    return irid;
+                  }
+                </code>
+              </pre>
+              <section class="features">
+                <article>
+                  <a
+                    href="https://github.com/diegoinacio/shading-lab/tree/master/OSL/Iridescence-Simple"
+                    class="image"
+                    target="_blank"
+                    ><img src="images/iridescence_simple_osl.jpg" alt=""
+                  /></a>
+                  <h3 class="major">Iridescence Simple</h3>
+                  <p>A simple iridescent shader.</p>
+                  <a
+                    href="https://github.com/diegoinacio/shading-lab/tree/master/OSL/Iridescence-Simple"
+                    class="special"
+                    target="_blank"
+                    >Learn more</a
+                  >
+                </article>
+              </section>
+              <!-- /* Shader -->
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Footer -->
+      <section id="footer"></section>
+    </div>
+
+    <!-- Scripts -->
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/jquery.scrollex.min.js"></script>
+    <script src="assets/js/browser.min.js"></script>
+    <script src="assets/js/breakpoints.min.js"></script>
+    <script src="assets/js/util.js"></script>
+    <script src="assets/js/main.js"></script>
+
+    <script src="assets/js/prism.js"></script>
+
+    <script src="assets/template/setup.js"></script>
+    <script src="assets/template/header.js"></script>
+    <script src="assets/template/menu.js"></script>
+    <script src="assets/template/footer.js"></script>
+  </body>
+</html>
